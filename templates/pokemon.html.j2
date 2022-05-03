@@ -32,7 +32,7 @@ Pokemon Finder
     {% for pokemon in table %}
       <tr>
         <th scope="row">{{pokemon.name}}</th>
-        <td>{{pokemon.sprite}}</td>
+        <td><img src="{{pokemon.sprite}}"></td>
         <td>{{pokemon.base_experience}}</td>
         <td>{{pokemon.hp_base}}</td>
         <td>{{pokemon.attack_base}}</td>
