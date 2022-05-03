@@ -11,7 +11,7 @@ def index():
 @app.route('/pokemon', methods=['GET','POST'])
 def pokemon():
     if request.method == 'POST':
-        name = request.form.get('name')
+        name = request.form.get('name').lower()
 
         url = f"https://pokeapi.co/api/v2/pokemon/{name}"
         response = requests.get(url)
