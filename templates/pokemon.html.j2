@@ -1,0 +1,45 @@
+{% extends 'base.html.j2' %}
+{% block title %}
+Pokemon Finder
+{% endblock %}
+
+{% block content %}
+    <h3>Search for information on your Pokemon below!</h3>
+    <form action="/pokemon" method="POST">
+        <div class="mb-3">
+            <label for="name" class="form-label">Pokemon Name</label>
+            <input type="text" class="form-control" id="name" aria-describedby="nameHelp">
+            <div id="nameHelp" class="form-text">What is the name of the Pokemon you would like to see?</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+{% if table %}
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Picture</th>
+        <th scope="col">Base Experience</th>
+        <th scope="col">Base HP</th>
+        <th scope="col">Base Attack</th>
+        <th scope="col">Base Defense</th>
+        <th scope="col">Ability</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for pokemon in table %}
+      <tr>
+        <th scope="row">{{pokemon.name}}</th>
+        <td>{{pokemon.sprite}}</td>
+        <td>{{pokemon.base_experience}}</td>
+        <td>{{pokemon.hp_base}}</td>
+        <td>{{pokemon.attack_base}}</td>
+        <td>{{pokemon.base_defense}}</td>
+        <td>{{pokemon.ability_name}}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endif %}
