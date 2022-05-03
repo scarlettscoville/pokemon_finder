@@ -4,12 +4,12 @@ Pokemon Finder
 {% endblock %}
 
 {% block content %}
+    <h1>Pokemon Characteristics</h1>
     <h3>Search for information on your Pokemon below!</h3>
     <form action="/pokemon" method="POST">
         <div class="mb-3">
             <label for="name" class="form-label">Pokemon Name</label>
-            <input type="text" class="form-control" id="name" aria-describedby="nameHelp">
-            <div id="nameHelp" class="form-text">What is the name of the Pokemon you would like to see?</div>
+            <input type="text" name="name" class="form-control" id="name">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
@@ -36,10 +36,12 @@ Pokemon Finder
         <td>{{pokemon.base_experience}}</td>
         <td>{{pokemon.hp_base}}</td>
         <td>{{pokemon.attack_base}}</td>
-        <td>{{pokemon.base_defense}}</td>
+        <td>{{pokemon.defense_base}}</td>
         <td>{{pokemon.ability_name}}</td>
       </tr>
     {% endfor %}
     </tbody>
   </table>
 {% endif %}
+
+{% endblock %}
