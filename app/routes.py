@@ -8,6 +8,18 @@ from app import app
 def index():
     return render_template('pokemon.html.j2')
 
+@app.route('/login', methods=['GET','POST'])
+def login():
+    form = LoginForm()
+    if request.method=='POST' and form.validate_on_submit():
+        # Doing the Login stuff :)
+        email = form.email.data.lower()
+        password = form.password.data
+        if email in app.config.get("REGISTERED_USERS") and password == app.config.get("REGISTERED_USERS").get(email).get('password'):
+            return f"Login successful! Welcome, {app.config.get('REGISTERED_USERS').get(email).get('password')}!"
+        error_string = "Incorrect email/password combo."
+        return render_template("login.html.j2", form=form)
+
 @app.route('/pokemon', methods=['GET','POST'])
 def pokemon():
     if request.method == 'POST':
