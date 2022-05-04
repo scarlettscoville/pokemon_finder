@@ -7,3 +7,7 @@ class LoginForm(FlaskForm):
     email = StringField('Email Address', validators=[DataRequired(),Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Login')
+
+class PokemonForm(FlaskForm):
+    name = StringField("Pokemon Name", validators = [DataRequired()])
+    submit = SubmitField("Submit")

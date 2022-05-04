@@ -7,11 +7,19 @@ Pokemon Finder
     <h1>Pokemon Characteristics</h1>
     <h3>Search for information on your Pokemon below!</h3>
     <form action="{{url_for('pokemon')}}" method="POST">
-        <div class="mb-3">
-            <label for="name" class="form-label">Pokemon Name</label>
-            <input type="text" name="name" class="form-control" id="name">
-        </div>
-        <button type="submit" class="btn btn-danger">Submit</button>
+
+      {{form.hidden_tag()}}
+      <div>
+      {{form.name.label(class="form-label")}}
+      {{form.name(class="form-control")}}
+      {% for error in form.name.errors %}
+      <span style="color:red">{{error}}</span>
+      {% endfor %}
+      </div>
+      <br>
+      <div>
+      {{form.search(class="btn btn-danger form-control")}}
+      </div>
     </form>
 
 {% if table %}

@@ -1,6 +1,7 @@
 from flask import render_template, request
 import requests
 from .forms import LoginForm
+from .forms import PokemonForm
 from app import app
 
 # Routes
@@ -24,6 +25,7 @@ def login():
 
 @app.route('/pokemon', methods=['GET','POST'])
 def pokemon():
+    form = PokemonForm()
     if request.method == 'POST':
         name = request.form.get('name').lower()
 
