@@ -1,4 +1,8 @@
 .container{
     margin-top: 50px;
-    background-image: href="../images/Background.png";
+}
+
+body{
+    background-image: url('../images/Background.png');
+    background-size: cover;
 }

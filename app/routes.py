@@ -6,7 +6,7 @@ from app import app
 # Routes
 @app.route('/', methods = ['GET'])
 def index():
-    return render_template('pokemon.html.j2')
+    return render_template('index.html.j2')
 
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -16,9 +16,11 @@ def login():
         email = form.email.data.lower()
         password = form.password.data
         if email in app.config.get("REGISTERED_USERS") and password == app.config.get("REGISTERED_USERS").get(email).get('password'):
-            return f"Login successful! Welcome, {app.config.get('REGISTERED_USERS').get(email).get('password')}!"
+            return f"Login successful! Welcome, {app.config.get('REGISTERED_USERS').get(email).get('name')}!"
         error_string = "Incorrect email/password combo."
         return render_template("login.html.j2", form=form)
+
+    return render_template("login.html.j2", form=form)
 
 @app.route('/pokemon', methods=['GET','POST'])
 def pokemon():
