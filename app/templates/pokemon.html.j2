@@ -1,6 +1,6 @@
 {% extends 'base.html.j2' %}
 {% block title %}
-Pokemon Finder
+Search Pokemon
 {% endblock %}
 
 {% block content %}
@@ -18,9 +18,10 @@ Pokemon Finder
       </div>
       <br>
       <div>
-      {{form.search(class="btn btn-danger form-control")}}
+      {{form.submit(class="btn btn-danger form-control")}}
       </div>
     </form>
+    <br>
 
 {% if table %}
 

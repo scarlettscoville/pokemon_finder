@@ -42,7 +42,7 @@ def pokemon():
         data = response.json()
         new_data = []
         pokemon_dict = {
-            "name": data["species"]["name"],
+            "name": data["species"]["name"].title(),
             "sprite": data["sprites"]["front_shiny"],
             "base_experience": data["base_experience"],
             "ability_name": data["abilities"][0]["ability"]["name"],
@@ -52,5 +52,6 @@ def pokemon():
         }
         new_data.append(pokemon_dict)
 
-        return render_template("pokemon.html.j2", table = new_data)
-    return render_template("pokemon.html.j2")
+        return render_template("pokemon.html.j2", table = new_data, form=form)
+
+    return render_template("pokemon.html.j2", form=form)
