@@ -1,9 +1,9 @@
 import os
+
+from flask_sqlalchemy import SQLAlchemy
+
 # CONFIG SECTION
 class Config():
     SECRET_KEY = os.environ.get("SECRET_KEY")
-    REGISTERED_USERS={
-        'scarlettscoville@gmail.com':{"name":"Scarlett","password":"abc123"},
-        'michael@dundermifflin.com':{"name":"Michael","password":"shesaid"},
-        'dwight@dundermifflin.com':{"name":"Dwight", "password":"beets"}
-    }
+    SQLALCHEMY_DATABASE_URI=os.environ.get("SQLALCHEMY_DATABASE_URI")
+    SQLALCHEMY_TRACK_MODIFICATIONS=os.environ.get("SQLALCHEMY_TRACK_MODIFICATIONS")
