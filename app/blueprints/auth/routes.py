@@ -1,5 +1,5 @@
 from flask import render_template, request, flash, redirect, url_for
-from .forms import EditProfileForm, LoginForm, PokemonForm, RegisterForm
+from .forms import EditProfileForm, LoginForm, RegisterForm
 from auth import bp as auth
 from ...models import User
 from flask_login import current_user, logout_user, login_user, login_required
@@ -16,7 +16,7 @@ def login():
         if u and u.check_hashed_password(password):
             login_user(u)
             flash('You have successfully logged in!', 'success')
-            return redirect(url_for('index'))
+            return redirect(url_for('main.index'))
         flash('Incorrect Email/Password combo. Please try again.', 'danger')
         return render_template('login.html.j2', form=form)
     return render_template("login.html.j2", form=form)

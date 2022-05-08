@@ -1,6 +1,5 @@
 from flask import render_template, request
 import requests
-from .forms import PokemonForm
 from .import bp as main
 from flask_login import login_required
 
@@ -13,10 +12,8 @@ def index():
 @main.route('/pokemon', methods=['GET','POST'])
 @login_required
 def pokemon():
-    form = PokemonForm()
-    if request.method == 'POST' and form.validate_on_submit():
+    if request.method == 'POST':
         name = request.form.get('name').lower()
-
         url = f"https://pokeapi.co/api/v2/pokemon/{name}"
         response = requests.get(url)
         if not response.ok:
@@ -40,5 +37,5 @@ def pokemon():
         }
         new_data.append(pokemon_dict)
 
-        return render_template("pokemon.html.j2", table = new_data, form=form)
-    return render_template("pokemon.html.j2", form=form)
+        return render_template("pokemon.html.j2", table = new_data)
+    return render_template("pokemon.html.j2")
