@@ -1,19 +1,18 @@
 {% extends 'base.html.j2' %}
 {% block title %}
-Search Pokemon
+Search Pokémon
 {% endblock %}
 
 {% block content %}
-    <h1>Pokemon Characteristics</h1>
-    <h3>Search for information on your Pokemon below!</h3>
+    <h1>Pokémon Characteristics</h1>
+    <h3>Search for information on your Pokémon below!</h3>
     <form action="{{url_for('main.pokemon')}}" method="POST">
-
       {{form.hidden_tag()}}
       <div>
       {{form.name.label(class="form-label")}}
       {{form.name(class="form-control")}}
       {% for error in form.name.errors %}
-      <span style="color:red">{{error}}</span>
+      <small style="color:red">{{error}}</small>
       {% endfor %}
       </div>
       <br>

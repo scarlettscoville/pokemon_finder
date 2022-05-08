@@ -31,7 +31,7 @@ class RegisterForm(FlaskForm):
     r3_img = markupsafe.Markup(f'<img src="https://avatars.dicebear.com/api/pixel-art/{r3}.svg" height="75px">')
     r4_img = markupsafe.Markup(f'<img src="https://avatars.dicebear.com/api/pixel-art/{r4}.svg" height="75px">')
 
-    icon = RadioField('Select an Avatar', validators=[DataRequired()],
+    icon = RadioField('Select an Avatar:', validators=[DataRequired()],
         choices=[(r1, r1_img), (r2, r2_img), (r3, r3_img), (r4, r4_img)]
     )
 

@@ -21,7 +21,7 @@
   <div>
   {{form.icon.label(class="form-label")}}
     <div>
-    {{% for subfield in form.icon %}}
+    {% for subfield in form.icon %}
       {{subfield}}
       {{subfield.label | safe}}
     {% endfor %}

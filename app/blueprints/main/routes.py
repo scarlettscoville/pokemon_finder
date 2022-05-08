@@ -1,5 +1,6 @@
-from flask import render_template, request
+from flask import render_template, request, flash
 import requests
+from .forms import PokemonForm
 from .import bp as main
 from flask_login import login_required
 
@@ -12,19 +13,21 @@ def index():
 @main.route('/pokemon', methods=['GET','POST'])
 @login_required
 def pokemon():
+    form = PokemonForm
     if request.method == 'POST':
         name = request.form.get('name').lower()
         url = f"https://pokeapi.co/api/v2/pokemon/{name}"
         response = requests.get(url)
         if not response.ok:
-            error_string = "There was an error...did you spell the name correctly?"
-            return render_template("pokemon.html.j2", error=error_string)
+            flash("There was an error...did you spell the name correctly?", "danger")
+            return render_template("pokemon.html.j2", form=form)
 
         if not response.json():
-            error_string = "Please re-enter...that Pokemon does not exist!"
-            return render_template("pokemon.html.j2", error=error_string)
+            flash("Please re-enter...that Pokemon does not exist!", "danger")
+            return render_template("pokemon.html.j2", form=form)
 
         data = response.json()
+        
         new_data = []
         pokemon_dict = {
             "name": data["species"]["name"].title(),
@@ -37,5 +40,5 @@ def pokemon():
         }
         new_data.append(pokemon_dict)
 
-        return render_template("pokemon.html.j2", table = new_data)
-    return render_template("pokemon.html.j2")
+        return render_template("pokemon.html.j2", table = new_data, form=form)
+    return render_template("pokemon.html.j2", form=form)

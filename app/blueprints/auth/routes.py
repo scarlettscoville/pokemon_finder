@@ -1,6 +1,6 @@
 from flask import render_template, request, flash, redirect, url_for
 from .forms import EditProfileForm, LoginForm, RegisterForm
-from auth import bp as auth
+from .import bp as auth
 from ...models import User
 from flask_login import current_user, logout_user, login_user, login_required
 
@@ -40,7 +40,7 @@ def register():
         except:
             flash("There was an unexpected error creating your account. Please try again later.", "danger")
             return render_template('register.html.j2', form=form)
-        flash('You have successfully registered with PokeFind!', 'success')
+        flash('You have successfully registered with PokéFind!', 'success')
         return redirect(url_for('auth.login'))
     return render_template('register.html.j2', form=form)
 
