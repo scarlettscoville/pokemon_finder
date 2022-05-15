@@ -11,6 +11,7 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String)
     created_on = db.Column(db.DateTime, default=dt.utcnow)
     icon = db.Column(db.Integer)
+    team = db.relationship('Pokemon', secondary = 'poke_team', backref = 'users', lazy = 'dynamic')
 
     def __repr__(self):
         return f'<User: {self.email} | {self.id}>'
@@ -37,6 +38,34 @@ class User(UserMixin, db.Model):
 
     def get_icon_url(self):
         return f'https://avatars.dicebear.com/api/pixel-art/{self.icon}.svg'
+
+class PokeTeam(db.Model):
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    pokemon = db.Column(db.Integer, db.ForeignKey('pokemon.pokemon_id'), primary_key=True)
+
+class Pokemon(db.Model):
+    pokemon_id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    sprite = db.Column(db.String)
+    experience = db.Column(db.String)
+    ability = db.Column(db.String)
+    attack = db.Column(db.String)
+    hp = db.Column(db.String)
+    defense = db.Column(db.String)
+
+    def from_dict(self, data):
+        self.name = data['name']
+        self.sprite = data['sprite']
+        self.experience = data['base_experience']
+        self.ability = data['ability_name']
+        self.attack = data['attack_base']
+        self.hp = data['hp_base']
+        self.defense = data['defense_base']
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
 
 @login.user_loader
 def load_user(id):
