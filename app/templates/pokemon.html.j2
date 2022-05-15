@@ -1,0 +1,60 @@
+{% extends 'base.html.j2' %}
+{% block title %}
+Search Pokémon
+{% endblock %}
+
+{% block content %}
+    <h1>Pokémon Characteristics</h1>
+    <h3>Search for information on your Pokémon below!</h3>
+    <form action="{{url_for('main.pokemon')}}" method="POST">
+      {# {{form.hidden_tag()}}
+      <div>
+      {{form.name.label(class="form-label")}}
+      {{form.name(class="form-control")}}
+      {% for error in form.name.errors %}
+      <span style="color:red">{{error}}</span>
+      {% endfor %}
+      </div> #}
+      <div class="mb-3">
+            <label for="name" class="form-label">Pokémon Name:</label>
+            <input type="text" name="name" class="form-control" id="name">
+        </div>
+      <br>
+      {# <div>
+      {{form.submit(class="btn btn-danger form-control")}}
+      </div> #}
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <br>
+
+{% if table %}
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Picture</th>
+        <th scope="col">Base Experience</th>
+        <th scope="col">Base HP</th>
+        <th scope="col">Base Attack</th>
+        <th scope="col">Base Defense</th>
+        <th scope="col">Ability</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for pokemon in table %}
+      <tr>
+        <th scope="row">{{pokemon.name}}</th>
+        <td><img src="{{pokemon.sprite}}"></td>
+        <td>{{pokemon.base_experience}}</td>
+        <td>{{pokemon.hp_base}}</td>
+        <td>{{pokemon.attack_base}}</td>
+        <td>{{pokemon.defense_base}}</td>
+        <td>{{pokemon.ability_name}}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endif %}
+
+{% endblock %}
