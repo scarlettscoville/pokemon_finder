@@ -15,7 +15,7 @@ def create_app(config_class=Config):
     #Init the app
     app = Flask(__name__)
     #Link in the Config
-    app.config.from_object(Config)
+    app.config.from_object(config_class)
 
     #Register the Plug-ins
     login.init_app(app)

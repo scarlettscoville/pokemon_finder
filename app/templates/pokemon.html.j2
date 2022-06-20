@@ -1,60 +1,68 @@
 {% extends 'base.html.j2' %}
 {% block title %}
-Search Pokémon
+Catch Pokémon
 {% endblock %}
 
 {% block content %}
-    <h1>Pokémon Characteristics</h1>
-    <h3>Search for information on your Pokémon below!</h3>
+    <h1>Choose your PokéTeam!</h1>
+    <h3>Search for the Pokémon you would like to add to your team.</h3>
     <form action="{{url_for('main.pokemon')}}" method="POST">
-      {# {{form.hidden_tag()}}
-      <div>
-      {{form.name.label(class="form-label")}}
-      {{form.name(class="form-control")}}
-      {% for error in form.name.errors %}
-      <span style="color:red">{{error}}</span>
-      {% endfor %}
-      </div> #}
-      <div class="mb-3">
-            <label for="name" class="form-label">Pokémon Name:</label>
-            <input type="text" name="name" class="form-control" id="name">
+        <div class="textbox_button">
+        {{form.hidden_tag()}}
+
+            <div class="mb-3">
+                {{form.name.label(class="form-label")}}
+                {{form.name(class="form-control w-25")}}
+
+                {% for error in form.name.errors %}
+                    <small style="color:red"></small>{{error}}</div>
+
+                {% endfor %}
+
+            </div>
+
+            <div>
+            {{form.submit(class="btn btn-dark form-control w-25 mb-3")}}
+            </div>
         </div>
-      <br>
-      {# <div>
-      {{form.submit(class="btn btn-danger form-control")}}
-      </div> #}
-      <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    <br>
 
-{% if table %}
+{% if pokemons %}
 
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Picture</th>
-        <th scope="col">Base Experience</th>
-        <th scope="col">Base HP</th>
-        <th scope="col">Base Attack</th>
-        <th scope="col">Base Defense</th>
-        <th scope="col">Ability</th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for pokemon in table %}
-      <tr>
-        <th scope="row">{{pokemon.name}}</th>
-        <td><img src="{{pokemon.sprite}}"></td>
-        <td>{{pokemon.base_experience}}</td>
-        <td>{{pokemon.hp_base}}</td>
-        <td>{{pokemon.attack_base}}</td>
-        <td>{{pokemon.defense_base}}</td>
-        <td>{{pokemon.ability_name}}</td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
+{% for poke in pokemons %}
+    <div class="card" style="width: 20rem; display: inline-block; width: 20%">
+        <div class="for_image">
+            <img src="{{poke.sprite}}" class="card-img-top" alt="...">
+        </div>
+        <div class="card-body">
+            <h4 class="card-title text-center">{{poke.name}}</h4>
+        </div>
+        <table class="table table-borderless" style="text-align: right; width: 75%; margin:0px auto;">
+            <tbody>
+            <tr>
+                <td scope="col">Experience</td>
+                <td>{{poke.base_experience}}</td>
+            </tr>
+            <tr>
+                <td scope="col">Ability</td>
+                <td>{{poke.ability_name}}</td>
+            </tr>
+            <tr>
+                <td scope="col">Attack</td>
+                <td>{{poke.attack_base}}</td>
+            </tr>
+            <tr>
+                <td scope="col">HP</td>
+                <td>{{poke.hp_base}}</td>
+            </tr>
+            <tr>
+                <td scope="col">Defense</td>
+                <td>{{poke.defense_base}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+{% endfor %}
 {% endif %}
-
+</div>
 {% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html.j2' %}
+
+{% block title %}
+
+Battle
+
+{% endblock %}
+
+{% block content %}
+
+<div>
+<h1>Battle!</h1>
+
+{% for user in users %}
+    <div class="card" style="width: 20rem; display: inline-block; width: 20%">
+        <div class="for_image">
+            <img src="{{user.get_icon_url()}}" class="card-img-top" alt="avatar">
+        </div>
+        <table class="table table-borderless" style="text-align: right; width: 75%; margin:0px auto;">
+            <tbody>
+                <tr>
+                    <td>
+                        {% for p in pokemons[user.id] %}
+                            <img src="{{p.sprite}}">
+                            <h5>{{p.name}}</h5>
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="col">Wins:</td>
+                    <td>{{user.loss_count}}</td>
+                </tr>
+                <tr>
+                    <td scope="col">Losses:</td>
+                    <td>{{user.loss_count}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="card-body">
+            {% if current_user.is_authenticated %}
+            <a href="{{url_for('main.battle_view', id=user.id)}}" class="btn btn-dark btn btn-success">Battle!</a>
+
+            {% endif %}
+        </div>
+    </div>
+{% endfor %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html.j2' %}
+
+{% block title %}
+PokéTeam
+{% endblock %}
+
+{% block content %}
+<div class="body">
+<h1>Your PokéTeam</h1>
+
+{% for poke in pokemons %}
+  <div class="card h-100" style="width: 20rem; display: inline-block; width: 20%">
+    <div class="for_image">
+      <img src="{{poke.sprite}}" class="card-img-top" alt="...">
+    </div>
+    <div class="card-body">
+      <h4 class="card-title text-center">{{poke.name}}</h4>
+    </div>
+    <table class="table table-borderless" style="text-align: right; width: 75%; margin:0px auto;">
+      <tbody>
+      <tr>
+        <td scope="col">Experience</td>
+        <td>{{poke.base_experience}}</td>
+      </tr>
+      <tr>
+        <td scope="col">Ability</td>
+        <td>{{poke.ability_name}}</td>
+      </tr>
+      <tr>
+        <td scope="col">Attack</td>
+        <td>{{poke.attack_base}}</td>
+      </tr>
+      <tr>
+        <td scope="col">HP</td>
+        <td>{{poke.hp_base}}</td>
+      </tr>
+      <tr>
+        <td scope="col">Defense</td>
+        <td>{{poke.defense_base}}</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class="card-body">
+      <a href="{{url_for('main.delete_pokemon', id=poke.poke_id)}}" class="card-link">Delete</a>
+    </div>
+  </div>
+{% endfor %}
+
+</div>
+
+{% endblock %}
