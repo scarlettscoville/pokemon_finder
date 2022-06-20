@@ -5,7 +5,7 @@ Catch Pokémon
 
 {% block content %}
     <h1>Choose your PokéTeam!</h1>
-    <h3>Search for the Pokémon you would like to add to your team.</h3>
+    <h4>Search for the Pokémon you would like to add to your team.</h4>
     <form action="{{url_for('main.pokemon')}}" method="POST">
         <div class="textbox_button">
         {{form.hidden_tag()}}
@@ -22,7 +22,7 @@ Catch Pokémon
             </div>
 
             <div>
-            {{form.submit(class="btn btn-dark form-control w-25 mb-3")}}
+            {{form.submit(class="btn btn-danger form-control w-25 mb-3")}}
             </div>
         </div>
     </form>
@@ -37,27 +37,27 @@ Catch Pokémon
         <div class="card-body">
             <h4 class="card-title text-center">{{poke.name}}</h4>
         </div>
-        <table class="table table-borderless" style="text-align: right; width: 75%; margin:0px auto;">
+        <table class="table table-borderless" style="text-align: left; width: 75%; margin:0px auto;">
             <tbody>
             <tr>
-                <td scope="col">Experience</td>
-                <td>{{poke.base_experience}}</td>
+                <td scope="col">Experience:</td>
+                <td>{{poke.experience}}</td>
             </tr>
             <tr>
-                <td scope="col">Ability</td>
-                <td>{{poke.ability_name}}</td>
+                <td scope="col">Ability:</td>
+                <td>{{poke.ability}}</td>
             </tr>
             <tr>
-                <td scope="col">Attack</td>
-                <td>{{poke.attack_base}}</td>
+                <td scope="col">Attack:</td>
+                <td>{{poke.attack}}</td>
             </tr>
             <tr>
-                <td scope="col">HP</td>
-                <td>{{poke.hp_base}}</td>
+                <td scope="col">HP:</td>
+                <td>{{poke.hp}}</td>
             </tr>
             <tr>
-                <td scope="col">Defense</td>
-                <td>{{poke.defense_base}}</td>
+                <td scope="col">Defense:</td>
+                <td>{{poke.defense}}</td>
             </tr>
             </tbody>
         </table>

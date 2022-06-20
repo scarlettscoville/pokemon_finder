@@ -1,6 +1,6 @@
 from flask import render_template, request, flash, redirect, url_for
 import requests
-from ...forms import PokemonForm
+from .forms import PokemonForm
 from .import bp as main
 from flask_login import login_required, current_user
 from app.models import Pokemon, PokeTeam, User
@@ -15,7 +15,7 @@ def index():
 @main.route('/pokemon', methods=['GET','POST'])
 @login_required
 def pokemon():
-    form = PokemonForm
+    form = PokemonForm()
     if request.method == 'POST' and form.validate_on_submit:
         name = form.name.data
         url = f'https://pokeapi.co/api/v2/pokemon/{name}'
@@ -32,7 +32,7 @@ def pokemon():
             "defense_base": pokemon["stats"][2]["base_stat"],
         }
         new_pokemon=Pokemon()
-        new_pokemon.poke_from_dict(pokemon_dict)
+        new_pokemon.pokemon_from_dict(pokemon_dict)
         new_pokemon.save()
 
         new_poketeam=PokeTeam()
@@ -51,7 +51,7 @@ def pokemon():
             flash(f'Pokemon already on team. Please choose a different Pokemon.', 'danger')
         else:
             if len(my_names) < 5:
-                current_user.collect.poke(new_pokemon)
+                current_user.collect_poke(new_pokemon)
             else:
                 flash('Your team is full!', 'danger')
 
